@@ -1,26 +1,39 @@
-<p><%= flash[:notice] %></p>
+<% if flash[:notice] %>
+  <div data-alert class="alert-box"><%= flash[:notice] %></div>
+<% end %>
 
-<h1><%= @post.title %></h1>
+<div class="row">
+  <h1><%= @post.title %></h1>
+</div>
 
-<p><small>Publicado: <%=@post.created_at %></small></p>
+<div class="row">
+  <p>
+    Autor: <%= @post.author %>
+    <small>Publicado: <%=@post.created_at %></small>
+  </p>
+</div>
 
-<p>Autor: <%= @post.author %></p>
-
-<div>
+<div class="row">
   <%= @post.body.html_safe %>
 </div>
 
-<div>
-  <h2>Comentarios</h2>
-  <% @post.comments.each do |comment| %>
-    <div>
-      <p><%= comment.body.html_safe %></p>
-      <p>
-        <span>Author: <%= comment.author %></span>
-        <span><%= comment.created_at %></span>
-      </p>
-    </div>
-  <% end %>
+<div class="row">
+  <p><%= link_to 'Editar', edit_post_path(@post), class: 'button' %></p>
+</div>
+
+<div class="row">
+  <ul class="large-block-grid-1">
+    <h3>Comentarios</h3>
+    <% @post.comments.each do |comment| %>
+      <li>
+        <p><%= comment.body.html_safe %></p>
+        <p>
+          <span>Author: <%= comment.author %></span>
+          <span><%= comment.created_at %></span>
+        </p>
+      </li>
+    <% end %>
+   <ul>
 
   <p>Dejar comentario:</p>
   <%= form_tag comment_post_path(@post) do%>

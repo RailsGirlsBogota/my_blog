@@ -1,12 +1,14 @@
 <% if @post.errors.any? %>
-  <p>
-    Los siguientes errores no permiten guardar el Post:
-    <ul>
-      <% @post.errors.full_messages.each do |error| %>
-        <li><%= error %></li>
-      <% end %>
-    </ul>
-  </p>
+  <div data-alert class="alert-box info radius">
+    <p>
+      Los siguientes errores no permiten guardar el Post:
+      <ul>
+        <% @post.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </p>
+  </div>
 <% end %>
 
 <%= form_for @post do |form| %>
