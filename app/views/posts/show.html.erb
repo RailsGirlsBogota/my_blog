@@ -1,0 +1,34 @@
+<p><%= flash[:notice] %></p>
+
+<h1><%= @post.title %></h1>
+
+<p><small>Publicado: <%=@post.created_at %></small></p>
+
+<p>Autor: <%= @post.author %></p>
+
+<div>
+  <%= @post.body.html_safe %>
+</div>
+
+<div>
+  <h2>Comentarios</h2>
+  <% @post.comments.each do |comment| %>
+    <div>
+      <p><%= comment.body.html_safe %></p>
+      <p>
+        <span>Author: <%= comment.author %></span>
+        <span><%= comment.created_at %></span>
+      </p>
+    </div>
+  <% end %>
+
+  <p>Dejar comentario:</p>
+  <%= form_tag comment_post_path(@post) do%>
+    <%= text_area :comment, :body %>
+    
+    <%= label :author, 'Autor' %>
+    <%= text_field :comment, :author %>
+   
+    <%= submit_tag 'Comentar' %>
+  <% end %>
+</div>
